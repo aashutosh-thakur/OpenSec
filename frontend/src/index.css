@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────────
+   Galaxy Black + White Dove system — no purple AI gradients,
+   no excessive neon. Professional dark cybersecurity palette.
+─────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Primary palette */
+  --color-galaxy-black:  var(--bg-main);
+  --color-galaxy-900:    #222123;
+  --color-galaxy-800:    #343336;
+  --color-galaxy-750:    #3A383B;
+  --color-galaxy-700:    #3E3D40;
+  --color-galaxy-600:    #4A4850;
+  --color-galaxy-500:    #5C5A62;
+
+  --color-white-dove:    #F0EFE7;
+  --color-white-dim:     #C4C3BC;
+  --color-white-muted:   #7A7975;
+  --color-white-subtle:  #4E4D4B;
+  --color-white-faint:   #3D3C3A;
+
+  /* Semantic status colors */
+  --color-critical:  #F28B82;
+  --color-high:      #E8A87C;
+  --color-medium:    #FDD663;
+  --color-low:       #81C995;
+  --color-info:      #A8C7FA;
+
+  /* Fonts */
+  --font-sans: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+
+  /* Spacing rhythm: 8px base */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+
+  /* Border radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  18px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+:root {
+  --bg-main: #2A292B;
+  --bg-surface: #1A191B;
+  --bg-modal: #1E1D1F;
+  --bg-navbar: rgba(30, 29, 31, 0.88);
+  --bg-header: rgba(42, 41, 43, 0.6);
+  --bg-header-solid: rgba(40, 39, 41, 0.97);
+  --bg-sidebar: rgba(22, 21, 23, 0.98);
+  --bg-panel: rgba(20, 19, 21, 0.98);
+  
+  --text-primary: #F0EFE7;
+  --text-secondary: rgba(240, 239, 231, 0.65);
+  --text-tertiary: rgba(240, 239, 231, 0.4);
+  --text-muted: rgba(240, 239, 231, 0.25);
+  
+  --border-light: rgba(240, 239, 231, 0.07);
+  --border-medium: rgba(240, 239, 231, 0.12);
+}
+
+:root.light {
+  --bg-main: #E8D2A5;
+  --bg-surface: #DFCAA0;
+  --bg-modal: #E5D0A3;
+  --bg-navbar: rgba(230, 210, 160, 0.9);
+  --bg-header: rgba(230, 210, 160, 0.75);
+  --bg-header-solid: rgba(230, 210, 160, 0.97);
+  --bg-sidebar: rgba(225, 205, 155, 0.98);
+  --bg-panel: rgba(225, 205, 155, 0.98);
+  
+  --text-primary: #2A292B;
+  --text-secondary: rgba(42, 41, 43, 0.75);
+  --text-tertiary: rgba(42, 41, 43, 0.55);
+  --text-muted: rgba(42, 41, 43, 0.4);
+  
+  --border-light: rgba(42, 41, 43, 0.1);
+  --border-medium: rgba(42, 41, 43, 0.18);
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* ─── Typography utilities ───────────────────────────────────────────────── */
+.font-mono  { font-family: var(--font-mono) !important; }
+.font-sans  { font-family: var(--font-sans) !important; }
+.text-dove  { color: var(--text-primary); }
+.text-muted { color: var(--text-muted); }
+
+/* ─── Card base ──────────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card, rgba(240, 239, 231, 0.02));
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.card:hover {
+  background: var(--bg-card-hover, rgba(240, 239, 231, 0.035));
+  border-color: var(--border-medium);
+}
+
+/* ─── Button base ────────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--text-primary);
+  color: var(--bg-main);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
+}
+.btn-primary:hover { opacity: 0.88; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--border-light);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-ghost:hover {
+  background: var(--border-medium);
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+/* ─── Status badge ───────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.badge-critical { background: rgba(242,139,130,0.12); color: #F28B82; }
+.badge-high     { background: rgba(232,168,124,0.12); color: #E8A87C; }
+.badge-medium   { background: rgba(253,214,99,0.12);  color: #FDD663; }
+.badge-low      { background: rgba(129,201,149,0.12); color: #81C995; }
+.badge-info     { background: rgba(168,199,250,0.12); color: #A8C7FA; }
+.badge-active   { background: rgba(129,201,149,0.10); color: #81C995; }
+.badge-warning  { background: rgba(253,214,99,0.10);  color: #FDD663; }
+.badge-inactive { background: rgba(240,239,231,0.06); color: rgba(240,239,231,0.4); }
+
+/* ─── Table ──────────────────────────────────────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  text-align: left;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(240, 239, 231, 0.35);
+  border-bottom: 1px solid rgba(240, 239, 231, 0.07);
+}
+.data-table td {
+  padding: 14px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(240, 239, 231, 0.05);
+  vertical-align: middle;
+}
+.data-table tbody tr {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.data-table tbody tr:hover {
+  background: rgba(240, 239, 231, 0.025);
+}
+.data-table tbody tr.selected {
+  background: rgba(240, 239, 231, 0.04);
+}
+
+/* ─── Form inputs ────────────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 9px 12px;
+  background: rgba(240, 239, 231, 0.05);
+  border: 1px solid rgba(240, 239, 231, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--color-white-dove);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus     { border-color: rgba(240, 239, 231, 0.3); }
+.input::placeholder { color: rgba(240, 239, 231, 0.25); }
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.6; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* ─── Animation classes ──────────────────────────────────────────────────── */
+.animate-slide-up    { animation: slide-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fade-in     { animation: fade-in 0.7s ease forwards; }
+.animate-slide-right { animation: slide-right 0.4s ease forwards; }
+.animate-blink       { animation: blink 1s step-end infinite; }
+.animate-pulse-dot   { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-spin        { animation: spin 1s linear infinite; }
+
+/* ─── Delay utilities ────────────────────────────────────────────────────── */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* ─── Skeleton loader ────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(240,239,231,0.04) 0%,
+    rgba(240,239,231,0.08) 50%,
+    rgba(240,239,231,0.04) 100%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Connection status indicator ───────────────────────────────────────── */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.status-dot.online  { background: #81C995; box-shadow: 0 0 6px rgba(129,201,149,0.6); }
+.status-dot.offline { background: #F28B82; box-shadow: 0 0 6px rgba(242,139,130,0.4); }
+
+/* ─── Empty state ────────────────────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 64px 24px;
+  color: rgba(240, 239, 231, 0.3);
+  text-align: center;
+}
+.empty-state h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(240, 239, 231, 0.5);
+  margin: 0;
+}
+.empty-state p {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ─── Section label ──────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(240, 239, 231, 0.3);
+  margin-bottom: 12px;
+}
+
+/* ─── Divider ────────────────────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(240, 239, 231, 0.06);
+  margin: 0;
+}
