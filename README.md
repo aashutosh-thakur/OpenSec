@@ -236,7 +236,3 @@ Grade:  A = 0–19  |  B = 20–39  |  C = 40–59  |  D = 60–74  |  F = 75+
 ## License
 
 MIT — see [LICENSE](LICENSE)
-
----
-
-<p align="center">Built with ❤️ for the security community</p>
