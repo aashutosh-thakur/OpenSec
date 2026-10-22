@@ -1,7 +1,7 @@
 <h1 align="center">
-  <img src="assets/image copy 4.png" alt="OpenSecX Landing" width="100%"/>
+  <img src="assets/image copy 4.png" alt="OpenSec Landing" width="100%"/>
   <br/>
-  OpenSecX
+  OpenSec
 </h1>
 
 <p align="center">
@@ -19,9 +19,9 @@
 
 ---
 
-## What is OpenSecX?
+## What is OpenSec?
 
-OpenSecX is a **self-hosted, pure-Python** security reconnaissance and vulnerability assessment platform. It unifies asset discovery, VAPT scanning, risk intelligence, and compliance mapping into a single open-source tool — built for security teams that demand clarity over complexity.
+OpenSec is a **self-hosted, pure-Python** security reconnaissance and vulnerability assessment platform. It unifies asset discovery, VAPT scanning, risk intelligence, and compliance mapping into a single open-source tool — built for security teams that demand clarity over complexity.
 
 No proprietary binary dependencies. No cloud lock-in. Runs entirely on Windows, macOS, and Linux.
 
@@ -95,7 +95,7 @@ No proprietary binary dependencies. No cloud lock-in. Runs entirely on Windows, 
 ## Architecture
 
 ```
-OpenSecX/
+OpenSec/
 ├── backend/                  # FastAPI + SQLAlchemy + SQLite
 │   └── app/
 │       ├── api/endpoints/    # scans · assets · findings · risk · stats
